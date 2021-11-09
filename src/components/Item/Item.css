@@ -1,0 +1,26 @@
+.btn {
+  padding: 0.25rem 0rem;
+  margin-bottom: 0.5rem;
+  background: #6e6eb6;
+  border-radius: 0.25rem;
+  box-shadow: 5px 5px 5px;
+  cursor: pointer;
+  transition: transform 250ms ease-out;
+  border: none;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn:hover {
+  z-index: 2;
+  transform: scale(1.05);
+}
+
+.active {
+  background: lightyellow;
+  font-weight: 1000;
+}

@@ -1,9 +1,11 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import dataReducer from "../data/dataSlice";
+import canvasReducer from "../components/Canvas/CanvasSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    data: dataReducer,
+    canvas: canvasReducer,
   },
 });
 
