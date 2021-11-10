@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import { Layer } from "./components/Layer/Layer";
 import { Canvas } from "./components/Canvas/Canvas";
+import { Error } from "./components/Error/Error";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import {
   loadData,
@@ -15,9 +16,15 @@ import { changeDrawCanvasState } from "./components/Canvas/CanvasSlice";
 function App() {
   const dispatch = useAppDispatch();
   const itemLayers = useAppSelector(selectItemLayers);
+  const error = useAppSelector(selectError);
+  const errorMessage = useAppSelector(selectErrorMessage);
 
   function handleSaveImgCLick(): void {
-    dispatch(changeDrawCanvasState(true));
+    if (!error) dispatch(changeDrawCanvasState(true));
+  }
+
+  function handleNewDesignsClick(): void {
+    dispatch(loadData());
   }
 
   useEffect(() => {
@@ -61,10 +68,11 @@ function App() {
         </div>
 
         {/* error message */}
-        {/* {error && <Error error={errorMessage} />} */}
+        {error && <Error error={errorMessage} />}
 
         <section id="design" className="design-selection-container">
-          {itemLayers &&
+          {!error &&
+            itemLayers &&
             itemLayers.map((layer: LayerType) => (
               <Layer key={layer.order} layer={layer} />
             ))}
@@ -72,17 +80,16 @@ function App() {
 
         <section className="desigin-display-container">
           {/* Canvas with preview images */}
-          {/* {!error && <Canvas />} */}
-          <Canvas />
+          {!error && <Canvas />}
         </section>
 
         <section className="buttons-container">
-          <div className="button-container">
+          <div className="button-container" onClick={handleNewDesignsClick}>
             <h3>Not inspired yet?</h3>
-            {/*  onClick={handleNewDesignsClick}*/}
+
             <p className="btn new-items-btn">Load new designs!</p>
           </div>
-          {/* onClick={handleSaveImgCLick} */}
+
           <div className="button-container" onClick={handleSaveImgCLick}>
             <h3>Satysfied?</h3>
             <p className="btn save-design-btn">Save your design!</p>

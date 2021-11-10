@@ -9,6 +9,6 @@ export async function fetchData() {
 
     return sortData(data);
   } catch (e: any) {
-    console.log(e.message);
+    throw e.message;
   }
 }
