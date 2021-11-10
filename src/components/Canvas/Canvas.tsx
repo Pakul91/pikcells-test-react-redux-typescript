@@ -20,6 +20,19 @@ export const Canvas: FC = () => {
   const layer1 = useRef<HTMLImageElement>(null);
   const layer2 = useRef<HTMLImageElement>(null);
 
+  useEffect(() => {
+    if (shouldDrawCanvas) {
+      drawCanvas(
+        canvasRef.current,
+        layer0.current,
+        layer1.current,
+        layer2.current
+      );
+      downloadCanvas(canvasRef.current);
+      dispatch(changeDrawCanvasState(false));
+    }
+  }, [shouldDrawCanvas, canvasRef, dispatch]);
+
   return (
     <div>
       <section className="desigin-display-container">

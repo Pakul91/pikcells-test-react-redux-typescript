@@ -1,4 +1,3 @@
-import { Ref, RefCallback } from "react";
 import { ItemType, LayerType, DataType } from "../data/dataSlice";
 
 /**
@@ -49,8 +48,10 @@ function assignStatusToItem(item: ItemType, i: number, indexOfActive: number) {
 /**
  * download canvas to user desktop
  */
-export function downloadCanvas(canvas: HTMLCanvasElement): void {
-  const a = document.createElement("a");
+export function downloadCanvas(canvas: HTMLCanvasElement | null): void {
+  const a: HTMLAnchorElement = document.createElement("a");
+
+  if (!canvas) return;
 
   document.body.appendChild(a);
   a.href = canvas.toDataURL();
@@ -63,17 +64,20 @@ export function downloadCanvas(canvas: HTMLCanvasElement): void {
  * draw canvas from the active items
  */
 export function drawCanvas(
-  canvasRef: any,
-  layer0: any,
-  layer1: any,
-  layer2: any
+  canvas: HTMLCanvasElement | null,
+  layer0: HTMLImageElement | null,
+  layer1: HTMLImageElement | null,
+  layer2: HTMLImageElement | null
 ) {
-  const width = canvasRef.current.clientWidth;
-  const height = canvasRef.current.clientHeight;
-  const ctx = canvasRef.current.getContext("2d");
+  if (!canvas || !layer0 || !layer1 || !layer2) return;
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) return;
   ctx.clearRect(0, 0, width, height);
 
-  ctx.drawImage(layer0.current, 0, 0, width, height);
-  ctx.drawImage(layer1.current, 0, 0, width, height);
-  ctx.drawImage(layer2.current, 0, 0, width, height);
+  ctx.drawImage(layer0, 0, 0, width, height);
+  ctx.drawImage(layer1, 0, 0, width, height);
+  ctx.drawImage(layer2, 0, 0, width, height);
 }

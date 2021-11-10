@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { Layer } from "./components/Layer/Layer";
 import { Canvas } from "./components/Canvas/Canvas";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
-import { loadData, selectLayers, LayerType } from "./data/dataSlice";
-import { useEffect } from "react";
+import {
+  loadData,
+  selectItemLayers,
+  selectError,
+  selectErrorMessage,
+  LayerType,
+} from "./data/dataSlice";
+import { changeDrawCanvasState } from "./components/Canvas/CanvasSlice";
 
 function App() {
   const dispatch = useAppDispatch();
-  const layers = useAppSelector(selectLayers);
+  const itemLayers = useAppSelector(selectItemLayers);
+
+  function handleSaveImgCLick(): void {
+    dispatch(changeDrawCanvasState(true));
+  }
 
   useEffect(() => {
     dispatch(loadData());
@@ -54,8 +64,8 @@ function App() {
         {/* {error && <Error error={errorMessage} />} */}
 
         <section id="design" className="design-selection-container">
-          {layers &&
-            layers.map((layer: LayerType) => (
+          {itemLayers &&
+            itemLayers.map((layer: LayerType) => (
               <Layer key={layer.order} layer={layer} />
             ))}
         </section>
@@ -73,7 +83,7 @@ function App() {
             <p className="btn new-items-btn">Load new designs!</p>
           </div>
           {/* onClick={handleSaveImgCLick} */}
-          <div className="button-container">
+          <div className="button-container" onClick={handleSaveImgCLick}>
             <h3>Satysfied?</h3>
             <p className="btn save-design-btn">Save your design!</p>
           </div>

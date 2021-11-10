@@ -95,6 +95,8 @@ export const dataSlice = createSlice({
 
 export const { setItemToActive } = dataSlice.actions;
 
-export const selectLayers = (state: RootState) => state.data.data.layers;
+export const selectItemLayers = (state: RootState) => state.data.data.layers;
+export const selectError = (state: RootState) => state.data.error;
+export const selectErrorMessage = (state: RootState) => state.data.errorMessage;
 
 export default dataSlice.reducer;
