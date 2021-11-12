@@ -24,3 +24,24 @@ main {
   background-color: $background-secondary;
   padding-bottom: $section-padding;
 }
+
+@media (max-width: $bp-medium) {
+  html {
+    font-size: $base-font-size * 0.75;
+  }
+  //changes to:
+  //   Layers
+  //   ActionButtons
+  //   Canvas
+}
+
+@media (max-width: $bp-small) {
+  html {
+    font-size: $base-font-size * 0.66;
+  }
+
+  //changes to:
+  //   Header
+  //   Description
+  //   ActionButtons
+}

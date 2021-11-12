@@ -18,3 +18,19 @@
     }
   }
 }
+
+@media (max-width: $bp-medium) {
+  .action-buttons-container {
+    .action-button-container {
+      width: 40%;
+    }
+  }
+}
+
+@media (max-width: $bp-small) {
+  .action-buttons-container {
+    .action-button-container {
+      width: 50%;
+    }
+  }
+}

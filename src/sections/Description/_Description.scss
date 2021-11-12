@@ -10,3 +10,9 @@ h2 {
   padding-bottom: $section-padding;
   color: $highlight-2;
 }
+
+@media (max-width: $bp-small) {
+  h2 {
+    font-size: 2.5rem;
+  }
+}

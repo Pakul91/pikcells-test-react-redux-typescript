@@ -30,3 +30,11 @@
     font-weight: 700;
   }
 }
+
+@media (max-width: $bp-medium) {
+  .layer-container {
+    width: 30%;
+    margin: 1rem 1%;
+    white-space: normal;
+  }
+}

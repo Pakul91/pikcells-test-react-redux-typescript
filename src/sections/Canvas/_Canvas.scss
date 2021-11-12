@@ -20,3 +20,9 @@
     position: fixed;
   }
 }
+
+@media (max-width: $bp-medium) {
+  .canvas-container {
+    height: 70vw;
+  }
+}

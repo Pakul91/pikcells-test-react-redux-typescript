@@ -50,3 +50,23 @@ h1 {
   width: 60%;
   margin: 0 auto;
 }
+
+@media (max-width: $bp-small) {
+  nav {
+    flex-direction: column;
+  }
+
+  .logo {
+    text-align: left;
+    font-size: 2.5rem;
+    padding-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .text {
+    width: 80%;
+  }
+}
