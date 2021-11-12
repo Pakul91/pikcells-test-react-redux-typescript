@@ -1,0 +1,26 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+html {
+  @extend %basic-font;
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3 {
+  margin: 1rem;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+main {
+  background-color: $background-secondary;
+  padding-bottom: $section-padding;
+}

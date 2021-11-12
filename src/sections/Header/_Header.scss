@@ -1,0 +1,52 @@
+header {
+  padding-bottom: $section-padding * 2;
+  background: $background-main;
+}
+
+nav {
+  padding-top: 1rem;
+  padding-bottom: $section-padding;
+  display: flex;
+}
+
+.logo {
+  font-family: "Gluten";
+  font-size: 3rem;
+  padding-left: 2rem;
+  color: $highlight-1;
+}
+
+.links {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  margin-right: 2rem;
+
+  a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: inherit;
+    margin: auto 1rem;
+  }
+
+  a[href="#contact"] {
+    z-index: 1;
+    font-weight: 700;
+    color: $background-main;
+    background-color: $highlight-1;
+
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+  }
+}
+
+h1 {
+  font-size: 4rem;
+  padding-bottom: 5rem;
+  color: $highlight-1;
+}
+
+.text {
+  width: 60%;
+  margin: 0 auto;
+}

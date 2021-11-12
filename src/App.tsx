@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./App.css";
+import "./sass/main.scss";
 import { Layers } from "./sections/Layers/Layers";
 import { Canvas } from "./sections/Canvas/Canvas";
 import { Error } from "./components/Error/Error";

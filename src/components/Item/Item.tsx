@@ -31,7 +31,7 @@ export const Item: FC<ItemProps> = (props) => {
 
   return (
     <p
-      className={`item btn  ${active ? "active" : ""} `}
+      className={`item  ${active ? "active" : ""} `}
       onClick={handleClick}
     >{`${item.name}`}</p>
   );

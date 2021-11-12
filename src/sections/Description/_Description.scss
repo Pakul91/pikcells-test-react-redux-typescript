@@ -1,0 +1,12 @@
+.discription {
+  padding: {
+    top: $section-padding * 2;
+    bottom: $section-padding;
+  }
+}
+
+h2 {
+  font-size: 3rem;
+  padding-bottom: $section-padding;
+  color: $highlight-2;
+}
