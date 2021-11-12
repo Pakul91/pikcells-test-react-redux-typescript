@@ -1,0 +1,22 @@
+.canvas-container {
+  height: 70vh;
+  position: relative;
+
+  .img-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      box-shadow: 3px 3px 12px -5px #000000;
+    }
+  }
+  /* canvas is hidden to preserve input but not show it to the user */
+  .hidden-canvas {
+    visibility: hidden;
+    z-index: -1;
+    position: fixed;
+  }
+}

@@ -34,39 +34,37 @@ export const Canvas: FC = () => {
   }, [shouldDrawCanvas, canvasRef, dispatch]);
 
   return (
-    <div>
-      <section className="desigin-display-container">
-        <div className="img-container">
-          <img
-            className="img img-layer0"
-            ref={layer0}
-            crossOrigin="anonymous"
-            src={canvasLayers.layer0}
-            alt="canvas layer"
-          />
-        </div>
-        <div className="img-container">
-          <img
-            ref={layer1}
-            className="img img-layer1"
-            crossOrigin="anonymous"
-            src={canvasLayers.layer1}
-            alt="canvas layer"
-          />
-        </div>
-        <div className="img-container">
-          <img
-            ref={layer2}
-            className="img img-layer2"
-            crossOrigin="anonymous"
-            src={canvasLayers.layer2}
-            alt="canvas layer"
-          />
-        </div>
-      </section>
+    <section className="canvas-container">
+      <div className="img-container">
+        <img
+          className="img img-layer0"
+          ref={layer0}
+          crossOrigin="anonymous"
+          src={canvasLayers.layer0}
+          alt="canvas layer"
+        />
+      </div>
+      <div className="img-container">
+        <img
+          ref={layer1}
+          className="img img-layer1"
+          crossOrigin="anonymous"
+          src={canvasLayers.layer1}
+          alt="canvas layer"
+        />
+      </div>
+      <div className="img-container">
+        <img
+          ref={layer2}
+          className="img img-layer2"
+          crossOrigin="anonymous"
+          src={canvasLayers.layer2}
+          alt="canvas layer"
+        />
+      </div>
       <section className="hidden-canvas">
         <canvas width="1140" height="760" ref={canvasRef}></canvas>
       </section>
-    </div>
+    </section>
   );
 };

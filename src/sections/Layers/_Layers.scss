@@ -12,6 +12,10 @@
   margin: 1rem 2%;
   white-space: nowrap;
 
+  h3 {
+    color: $highlight-1;
+  }
+
   .item {
     display: flex;
     justify-content: center;
