@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import dataReducer from "../data/dataSlice";
-import canvasReducer from "../components/Canvas/CanvasSlice";
+import canvasReducer from "../sections/Canvas/CanvasSlice";
 
 export const store = configureStore({
   reducer: {

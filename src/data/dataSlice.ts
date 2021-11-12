@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchData } from "../utilitties/pikcellsAPI";
-import { updateCanvasLayer } from "../components/Canvas/CanvasSlice";
+import { updateCanvasLayer } from "../sections/Canvas/CanvasSlice";
 import { AppDispatch } from "../app/store";
 
 import { RootState } from "../app/store";

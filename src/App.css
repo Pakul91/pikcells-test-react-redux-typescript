@@ -38,6 +38,10 @@ p {
   font-size: 1.5rem;
 }
 
+/* .App > * {
+  border: 1px solid red;
+} */
+
 /* 2) HEADER STYLES */
 header {
   padding-bottom: 10rem;
@@ -104,7 +108,7 @@ h2 {
   color: var(--highlight-2);
 }
 
-.design-selection-container {
+.layers-selection-container {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -175,16 +179,15 @@ img {
 
 /* 5) BUTTONS CONTAINER STYLES */
 
-.buttons-container {
+.action-buttons-container {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
 }
-.button-container {
+.action-button-container {
   width: 25%;
 }
-.new-items-btn,
-.save-design-btn {
+.action-button {
   margin: 0 auto;
   width: 10rem;
   font-weight: 700;
@@ -214,7 +217,7 @@ footer {
     white-space: normal;
   }
 
-  .button-container {
+  .action-button-container {
     width: 40%;
   }
 }
@@ -228,7 +231,7 @@ footer {
     display: none;
   }
 
-  .button-container {
+  .action-button-container {
     width: 50%;
   }
 }

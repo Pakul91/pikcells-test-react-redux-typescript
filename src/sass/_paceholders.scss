@@ -1,0 +1,16 @@
+%basic-font {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 400;
+}
+
+%btn {
+  padding: 0.25rem 0rem;
+  margin-bottom: 0.5rem;
+  background: var(--button-main);
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 3px 3px 8px -1px #000000;
+  cursor: pointer;
+  transition: transform 250ms ease-out;
+  border: none;
+}
