@@ -1,4 +1,9 @@
-import { ItemType, LayerType, DataType } from "../data/dataSlice";
+import { ItemType, DataType, LayerType } from "../data/dataSlice";
+import {
+  InitialItem,
+  InitialLayer,
+  InitialData,
+} from "../utilitties/pikcellsAPI";
 
 /**
  * sorting callback function
@@ -6,10 +11,41 @@ import { ItemType, LayerType, DataType } from "../data/dataSlice";
  * @param {object} b element of items array
  * @returns result of comparison for ascending order
  */
-function sortByOrderProp(a: ItemType, b: ItemType): number {
+function sortByOrderProp(a: InitialItem, b: InitialItem): number {
   if (a.order < b.order) return -1;
   if (a.order < b.order) return 1;
   return 0;
+}
+
+/**
+ * @param item item passed from the array
+ * @param i index of item in items array
+ * @param indexOfActive Index of item that should be active in current layer
+ * @returns {ItemType} InitialItem object with 'active' property added
+ */
+function formatItem(
+  item: InitialItem,
+  i: number,
+  indexOfActive: number
+): ItemType {
+  return { ...item, active: i === indexOfActive ? true : false };
+}
+
+/**
+ *  sort items in  layer in ascending order and add active property to each
+ * @param {InitialLayer} layer object representing each layer from data recived from API call
+ * @param {number}defConfig points out which Item object should be set as active
+ * @returns {LayerType} new Layer with sorted and formated Items
+ */
+function formateLayer(layer: InitialLayer, defConfig: number): LayerType {
+  // sorting items in array in ascending order
+  layer.items.sort(sortByOrderProp);
+
+  // assigning 'active' property to each item object
+  const formatedItems = layer.items.map(
+    (item: InitialItem, i: number): ItemType => formatItem(item, i, defConfig)
+  );
+  return { ...layer, items: formatedItems };
 }
 
 /**
@@ -17,32 +53,18 @@ function sortByOrderProp(a: ItemType, b: ItemType): number {
  * @param {object} input data returned from fetch request
  * @returns {object} copy of input data sorted in ascending order
  */
-export function sortData(input: DataType): DataType | void {
-  if (!input) return;
-
+export function sortData(input: InitialData): DataType {
   const data = { ...input };
   const defConfig: number[] = data.default_configuration;
 
-  //sort items in each layer in ascending order
-  data.layers.forEach((layer: LayerType) => {
-    const activeLayer: number = layer.order;
-    layer.items.sort(sortByOrderProp);
-    layer.items.forEach((item: ItemType, i: number) =>
-      assignStatusToItem(item, i, defConfig[activeLayer])
-    );
-  });
+  //sort items in each layer in ascending order and add active property to each
+  const formatedLayers = data.layers.map(
+    (layer: InitialLayer, i: number): LayerType => {
+      return formateLayer(layer, defConfig[i]);
+    }
+  );
 
-  return data;
-}
-
-/**
- *
- * @param item item passed from the array
- * @param i index of item in items array
- * @param indexOfActive Index of item that should be active in current layer
- */
-function assignStatusToItem(item: ItemType, i: number, indexOfActive: number) {
-  item.active = i === indexOfActive ? true : false;
+  return { ...input, layers: formatedLayers };
 }
 
 /**
@@ -70,6 +92,7 @@ export function drawCanvas(
   layer2: HTMLImageElement | null
 ) {
   if (!canvas || !layer0 || !layer1 || !layer2) return;
+
   const width = canvas.clientWidth;
   const height = canvas.clientHeight;
   const ctx = canvas.getContext("2d");

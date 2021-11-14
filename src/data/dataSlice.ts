@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchData } from "../utilitties/pikcellsAPI";
+import fetchData from "../utilitties/pikcellsAPI";
 import { updateCanvasLayer } from "../sections/Canvas/CanvasSlice";
 import { AppDispatch } from "../app/store";
+import { sortData } from "../utilitties/helpers";
 
 import { RootState } from "../app/store";
 
@@ -37,9 +38,15 @@ const initialState: State = {
 };
 
 export const loadData = createAsyncThunk("state/loadData", async () => {
-  const data = await fetchData();
+  try {
+    const data = await fetchData();
 
-  return data;
+    const soretedData = sortData(data);
+
+    return soretedData;
+  } catch (error: any) {
+    throw error.message;
+  }
 });
 
 //thunk to handle logic when clicking on item
@@ -49,7 +56,6 @@ export const handleItemCLick = (
   index: number
 ) => {
   return (dispatch: AppDispatch) => {
-    console.log("clicked");
     dispatch(updateCanvasLayer({ layer, imgSrc }));
     dispatch(setItemToActive({ layer, index }));
   };
