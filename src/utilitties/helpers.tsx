@@ -11,9 +11,9 @@ import {
  * @param {object} b element of items array
  * @returns result of comparison for ascending order
  */
-function sortByOrderProp(a: InitialItem, b: InitialItem): number {
+export function sortByOrderProp(a: InitialItem, b: InitialItem): number {
   if (a.order < b.order) return -1;
-  if (a.order < b.order) return 1;
+  if (a.order > b.order) return 1;
   return 0;
 }
 
@@ -23,27 +23,23 @@ function sortByOrderProp(a: InitialItem, b: InitialItem): number {
  * @param indexOfActive Index of item that should be active in current layer
  * @returns {ItemType} InitialItem object with 'active' property added
  */
-function formatItem(
-  item: InitialItem,
-  i: number,
-  indexOfActive: number
-): ItemType {
-  return { ...item, active: i === indexOfActive ? true : false };
+export function formatItem(item: InitialItem, indexOfActive: number): ItemType {
+  return { ...item, active: item.order === indexOfActive ? true : false };
 }
 
 /**
  *  sort items in  layer in ascending order and add active property to each
  * @param {InitialLayer} layer object representing each layer from data recived from API call
- * @param {number}defConfig points out which Item object should be set as active
+ * @param {number}defConfig points out which Item object should be set as active. Value extracted form default_configuration property
  * @returns {LayerType} new Layer with sorted and formated Items
  */
-function formateLayer(layer: InitialLayer, defConfig: number): LayerType {
+export function formatLayer(layer: InitialLayer, defConfig: number): LayerType {
   // sorting items in array in ascending order
   layer.items.sort(sortByOrderProp);
 
   // assigning 'active' property to each item object
   const formatedItems = layer.items.map(
-    (item: InitialItem, i: number): ItemType => formatItem(item, i, defConfig)
+    (item: InitialItem, i: number): ItemType => formatItem(item, defConfig)
   );
   return { ...layer, items: formatedItems };
 }
@@ -53,14 +49,14 @@ function formateLayer(layer: InitialLayer, defConfig: number): LayerType {
  * @param {object} input data returned from fetch request
  * @returns {object} copy of input data sorted in ascending order
  */
-export function sortData(input: InitialData): DataType {
+export function formatData(input: InitialData): DataType {
   const data = { ...input };
   const defConfig: number[] = data.default_configuration;
 
   //sort items in each layer in ascending order and add active property to each
   const formatedLayers = data.layers.map(
     (layer: InitialLayer, i: number): LayerType => {
-      return formateLayer(layer, defConfig[i]);
+      return formatLayer(layer, defConfig[i]);
     }
   );
 
@@ -68,7 +64,10 @@ export function sortData(input: InitialData): DataType {
 }
 
 /**
- * download canvas to user desktop
+ * download canvas
+ * * I've used method from this youtube clip:
+ * https://www.youtube.com/watch?v=YoVJWZrS2WU
+ * altho navigator.msSaveBlob seems to be depreciated, and everything works fine on edge without it.
  */
 export function downloadCanvas(canvas: HTMLCanvasElement | null): void {
   const a: HTMLAnchorElement = document.createElement("a");

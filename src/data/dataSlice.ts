@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import fetchData from "../utilitties/pikcellsAPI";
 import { updateCanvasLayer } from "../sections/Canvas/CanvasSlice";
 import { AppDispatch } from "../app/store";
-import { sortData } from "../utilitties/helpers";
+import { formatData } from "../utilitties/helpers";
 
 import { RootState } from "../app/store";
 
@@ -41,9 +41,9 @@ export const loadData = createAsyncThunk("state/loadData", async () => {
   try {
     const data = await fetchData();
 
-    const soretedData = sortData(data);
+    const formatedData = formatData(data);
 
-    return soretedData;
+    return formatedData;
   } catch (error: any) {
     throw error.message;
   }
